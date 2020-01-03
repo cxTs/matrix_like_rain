@@ -25,12 +25,11 @@ for(let i = 0; i < nbStreams; i++) {
     x += 14 ;
 }
 
-
-var font = 0;
-
 function drawChar() {
     clear();
     for(s of streams) {
+        // this part checks the speed of each stream and give the symbols of the stream
+        // a font size, a fill color and stroke color in function of this speed
         if(s.speedUnder(10)) {
             ctx.fillStyle = "#02150155";
             ctx.strokeStyle = "#2e5424";
@@ -62,12 +61,16 @@ function drawChar() {
                 }
             }
         }
+        // calling function of the stream object
         s.rain();
         s.draw();
     }
+    // requesting loop animation with drawChar callback
     window.requestAnimationFrame(drawChar);
 }
 
+
+// utils
 function clear() {
     // for the purpose of this project, clear() doesn't really clear the scene but repaint it
     // with a slightly transparent black color to give the symbols a blury effect when it move
@@ -77,21 +80,11 @@ function clear() {
     ctx.restore();
 }
 
-
-
-
-
-
-
-
-
-// utils
 function getRandom(min, max) {
     min = Math.ceil(min);
-    max = max | 0; // l'opérateur OU binaire permet d'éviter l'appel à Math.floor() qui est plus lent
+    max = max | 0; // OR operator is faster than Math.floor() function
     return (Math.random() * (max - min +1)) | 0 + min;
 }
 
-
-
+// requesting loop animation with drawChar callback
 window.requestAnimationFrame(drawChar);
