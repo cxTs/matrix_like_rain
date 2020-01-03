@@ -1,7 +1,7 @@
 function Stream() {
     this.nbSymbol = getRandom(5, 25);
     this.symbols = [];
-    this.ySpeed = getRandom(5, 30);
+    this.ySpeed = getRandom(5, 25);
     this.xSpeed = 0;
     this.fontSize = 16;
     this.x = 0;

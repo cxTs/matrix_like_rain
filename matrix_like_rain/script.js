@@ -48,7 +48,7 @@ function drawChar() {
                     ctx.lineWidth = 3;
                     ctx.font = "18px sans-serif";
                 } else {
-                    if(s.speedUnder(24)) {
+                    if(s.speedUnder(23)) {
                         ctx.fillStyle = "#19d60b";
                         ctx.strokeStyle = "#c3ff9433";
                         ctx.lineWidth = 4;
@@ -68,7 +68,6 @@ function drawChar() {
     // requesting loop animation with drawChar callback
     window.requestAnimationFrame(drawChar);
 }
-
 
 // utils
 function clear() {
