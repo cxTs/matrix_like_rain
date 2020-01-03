@@ -1,0 +1,94 @@
+//window.alert("Reeeaaaaaadyyyy!!!");
+const scene = document.querySelector("#scene");
+const scale = window.devicePixelRatio;
+scene.width = (document.getElementsByTagName("body")[0].clientWidth * scale);
+scene.height = (document.getElementsByTagName("body")[0].clientHeight * scale);
+const ctx = scene.getContext('2d');
+ctx.fillStyle = "#0a580577";
+ctx.strokeStyle = "#8DFF6E33";
+const width = scene.clientWidth;
+const height = scene.clientHeight;
+
+var streams = [];
+var nbStreams = 100;
+var x = 0;
+for(let i = 0; i < nbStreams; i++) {
+    streams.push(new Stream());
+    streams[i].populate(x, getRandom(-500, -2000));
+    x += 14 ;
+}
+
+
+var font = 0;
+// draw
+function drawChar() {
+    clear();
+    for(s of streams) {
+        if(s.speedUnder(10)) {
+            ctx.fillStyle = "#02150155";
+            ctx.strokeStyle = "#2e5424";
+            ctx.lineWidth = 1;
+            ctx.font = "10px sans-serif";
+        } else {
+            if(s.speedUnder(14) ) {
+                ctx.fillStyle = "#0f8407";
+                ctx.strokeStyle = "#8DFF6E33";
+                ctx.lineWidth = 3;
+                ctx.font = "14px sans-serif";
+            } else {
+                if(s.speedUnder(18) ) {
+                    ctx.fillStyle = "#0f8407";
+                    ctx.strokeStyle = "#8DFF6E33";
+                    ctx.lineWidth = 3;
+                    ctx.font = "18px sans-serif";
+                } else {
+                    if(s.speedUnder(24)) {
+                        ctx.fillStyle = "#19d60b";
+                        ctx.strokeStyle = "#c3ff9433";
+                        ctx.lineWidth = 4;
+                        ctx.font = "24px sans-serif";
+                    } else {
+                        ctx.fillStyle = "#85d65a";
+                        ctx.font = "34px sans-serif";
+
+                    }
+                }
+            }
+        }
+        // if(s.ySpeed == 29) {
+        //     ctx.font = "60px sans-serif";
+        // }
+        s.rain();
+        s.draw();
+    }
+    window.requestAnimationFrame(drawChar);
+}
+
+function clear() {
+    // permet non pas d'effacer le canvas mais, rempli le canvas d'un fond noir légèrement
+    // transparent donnant ainsi un effet de trainée au streams
+    ctx.save();
+    ctx.fillStyle = "#00000086";
+    ctx.fillRect(0, 0, width, height);
+    ctx.restore();
+    //ctx.clearRect(0, 0, width, height);
+}
+
+
+
+
+
+
+
+
+
+// utils
+function getRandom(min, max) {
+    min = Math.ceil(min);
+    max = max | 0; // l'opérateur OU binaire permet d'éviter l'appel à Math.floor() qui est plus lent
+    return (Math.random() * (max - min +1)) | 0 + min;
+}
+
+
+
+window.requestAnimationFrame(drawChar);
