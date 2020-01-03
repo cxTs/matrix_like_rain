@@ -73,7 +73,7 @@ function drawChar() {
 // utils
 function clear() {
     // for the purpose of this project, clear() doesn't really clear the scene but repaint it
-    // with a slightly transparent black color to give the symbols a blury effect when it move
+    // with a slightly transparent black color to give the symbols a blury effect when they move
     ctx.save();
     ctx.fillStyle = "#00000086";
     ctx.fillRect(0, 0, width, height);
