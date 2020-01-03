@@ -1,26 +1,33 @@
-//window.alert("Reeeaaaaaadyyyy!!!");
+// canvas and scene setup
 const scene = document.querySelector("#scene");
 const scale = window.devicePixelRatio;
+
 scene.width = (document.getElementsByTagName("body")[0].clientWidth * scale);
 scene.height = (document.getElementsByTagName("body")[0].clientHeight * scale);
+
 const ctx = scene.getContext('2d');
+
 ctx.fillStyle = "#0a580577";
 ctx.strokeStyle = "#8DFF6E33";
+
 const width = scene.clientWidth;
 const height = scene.clientHeight;
 
 var streams = [];
 var nbStreams = 100;
 var x = 0;
+
+// init of the streams containing symbol that will rain down on the screen
 for(let i = 0; i < nbStreams; i++) {
     streams.push(new Stream());
     streams[i].populate(x, getRandom(-500, -2000));
+    // x give the position of the next stream on the x axis of the canvas
     x += 14 ;
 }
 
 
 var font = 0;
-// draw
+
 function drawChar() {
     clear();
     for(s of streams) {
@@ -55,9 +62,6 @@ function drawChar() {
                 }
             }
         }
-        // if(s.ySpeed == 29) {
-        //     ctx.font = "60px sans-serif";
-        // }
         s.rain();
         s.draw();
     }
@@ -65,13 +69,12 @@ function drawChar() {
 }
 
 function clear() {
-    // permet non pas d'effacer le canvas mais, rempli le canvas d'un fond noir légèrement
-    // transparent donnant ainsi un effet de trainée au streams
+    // for the purpose of this project, clear() doesn't really clear the scene but repaint it
+    // with a slightly transparent black color to give the symbols a blury effect when it move
     ctx.save();
     ctx.fillStyle = "#00000086";
     ctx.fillRect(0, 0, width, height);
     ctx.restore();
-    //ctx.clearRect(0, 0, width, height);
 }
 
 
